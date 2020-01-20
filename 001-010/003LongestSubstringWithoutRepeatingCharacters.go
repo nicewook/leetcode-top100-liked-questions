@@ -1,4 +1,5 @@
 // 3. Longest Substring Without Repeating Characters
+// https://leetcode.com/problems/longest-substring-without-repeating-characters/
 // Given a string, find the length of the longest substring without repeating characters.
 
 // Example 1:
@@ -18,6 +19,14 @@
 // Explanation: The answer is "wke", with the length of 3.
 // Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
+/*
+고려사항
+1. 빈 string 인 경우는?
+2. nil string 인 경우는?
+3. 본적이 있는 녀석이면 이전에 본거 다음 녀석이 start index 가 된다.
+	- 그 전까지의 길이를 저장해둔다.
+*/
+
 func lengthOfLongestSubstring(s string) int {
 	var max, start int
 	lastSeen := make(map[rune]int) // key: charactor, value: index
@@ -29,7 +38,7 @@ func lengthOfLongestSubstring(s string) int {
 			}
 			start = index + 1
 		}
-		lastSeen[c] = i
+		lastSeen[c] = i // 무조건 최신으로, 마지막에 본 위치로 업데이트
 	}
 	lastLen := len(s) - start
 	if max < lastLen {
